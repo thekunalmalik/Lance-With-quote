@@ -1,0 +1,43 @@
+.milestone-card {
+    background-color: #ffffff; /* White background for the card */
+    border: 1px solid #ddd; /* Light border around the card */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Padding inside the card */
+    margin: 16px 0; /* Margin around the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .milestone-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  }
+  
+  .milestone-card p {
+    margin: 8px 0; /* Spacing between paragraphs */
+    font-size: 14px; /* Font size for text */
+    color: #333; /* Darker text color */
+  }
+  
+  .milestone-card button {
+    background-color: #4CAF50; /* Green background for buttons */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 16px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-right: 8px; /* Spacing between buttons */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  .milestone-card button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .review-requests {
+    margin-top: 12px; /* Spacing above the review requests section */
+  }
+  
+  .review-requests .review-request-card {
+    margin-top: 8px; /* Spacing between review request cards */
+  }
+  

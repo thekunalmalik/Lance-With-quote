@@ -1,0 +1,66 @@
+{
+  "name": "delance",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@4everland/upload-pin": "^1.1.1",
+    "@aws-sdk/client-s3": "3.391.0",
+    "@aws-sdk/lib-storage": "3.391.0",
+    "@chakra-ui/react": "^3.0.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@truffle/hdwallet-provider": "^2.1.15",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "ethers": "^6.13.4",
+    "express": "^4.21.2",
+    "framer-motion": "^11.11.9",
+    "multer": "^1.4.5-lts.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.4.0",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^2.1.4",
+    "web3": "^4.14.0",
+    "web3-utils": "^4.3.2"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "server": "node server/index.js",
+    "ganache": "ganache -p 7545",
+    "migrate:dev": "truffle migrate --network development --reset",
+    "test:dev": "truffle test --network development"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "ganache": "^7.9.0",
+    "os-browserify": "^0.3.0",
+    "react-app-rewired": "^2.2.1",
+    "url": "^0.11.4"
+  }
+}

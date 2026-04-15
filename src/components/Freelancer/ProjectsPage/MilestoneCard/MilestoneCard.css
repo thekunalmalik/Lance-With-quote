@@ -1,0 +1,24 @@
+.milestone-card {
+    background-color: #f9f9f9; /* Light background for the card */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Padding inside the card */
+    margin: 10px 0; /* Margin between cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s; /* Smooth scale on hover */
+  }
+  
+  .milestone-card:hover {
+    transform: scale(1.02); /* Slightly scale up on hover */
+  }
+  
+  .milestone-card p {
+    margin: 8px 0; /* Margin for paragraph elements */
+    font-size: 14px; /* Font size for text */
+    color: #333; /* Dark text color */
+  }
+  
+  .milestone-card p:last-child {
+    font-weight: bold; /* Make the last paragraph bold (could be used for important info) */
+  }
+  

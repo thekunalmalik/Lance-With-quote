@@ -1,0 +1,40 @@
+.milestone-card {
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Inner spacing */
+    margin: 12px 0; /* Space above and below the card */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.milestone-card:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.milestone-card p {
+    margin: 8px 0; /* Space between paragraphs */
+    color: #333; /* Darker text color for better readability */
+}
+
+.milestone-card input[type="file"] {
+    margin: 12px 0; /* Space around file input */
+}
+
+.milestone-card button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Inner spacing */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color change */
+}
+
+.milestone-card button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.review-responses {
+    margin-top: 16px; /* Space above review responses section */
+}

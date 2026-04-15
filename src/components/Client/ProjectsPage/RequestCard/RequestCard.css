@@ -1,0 +1,38 @@
+.request-card {
+    background-color: #f9f9f9; /* Light background color for the card */
+    border: 1px solid #ddd; /* Light border around the card */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Padding inside the card */
+    margin: 16px 0; /* Margin around the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  }
+  
+  .request-card p {
+    margin: 8px 0; /* Spacing between paragraphs */
+    font-size: 14px; /* Font size for text */
+    color: #333; /* Darker text color */
+  }
+  
+  .request-card button {
+    background-color: #4CAF50; /* Green background for accept button */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 16px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-right: 8px; /* Spacing between buttons */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  .request-card button:hover {
+    background-color: #45a049; /* Darker green on hover for accept button */
+  }
+  
+  .request-card button:nth-of-type(2) {
+    background-color: #f44336; /* Red background for decline button */
+  }
+  
+  .request-card button:nth-of-type(2):hover {
+    background-color: #e53935; /* Darker red on hover for decline button */
+  }
+  

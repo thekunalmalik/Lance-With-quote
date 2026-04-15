@@ -1,0 +1,2802 @@
+{
+  "contractName": "KlerosIntegration",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_arbitrator",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "disputeId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "partyA",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "partyB",
+          "type": "address"
+        }
+      ],
+      "name": "DisputeCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "disputeId",
+          "type": "uint256"
+        }
+      ],
+      "name": "DisputeRaised",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "disputeId",
+          "type": "uint256"
+        }
+      ],
+      "name": "DisputeResolved",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "arbitrator",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "disputeCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "disputes",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "partyA",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "partyB",
+          "type": "address"
+        },
+        {
+          "internalType": "enum KlerosIntegration.Status",
+          "name": "status",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "disputeId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_partyB",
+          "type": "address"
+        }
+      ],
+      "name": "raiseDispute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_disputeId",
+          "type": "uint256"
+        }
+      ],
+      "name": "resolveDispute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_disputeId",
+          "type": "uint256"
+        }
+      ],
+      "name": "checkDisputeStatus",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_disputeId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getDisputeResult",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.34+commit.80d5c536\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_arbitrator\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"disputeId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"partyA\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"partyB\",\"type\":\"address\"}],\"name\":\"DisputeCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"disputeId\",\"type\":\"uint256\"}],\"name\":\"DisputeRaised\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"disputeId\",\"type\":\"uint256\"}],\"name\":\"DisputeResolved\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"arbitrator\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_disputeId\",\"type\":\"uint256\"}],\"name\":\"checkDisputeStatus\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"disputeCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"disputes\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"partyA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"partyB\",\"type\":\"address\"},{\"internalType\":\"enum KlerosIntegration.Status\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"disputeId\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_disputeId\",\"type\":\"uint256\"}],\"name\":\"getDisputeResult\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_partyB\",\"type\":\"address\"}],\"name\":\"raiseDispute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_disputeId\",\"type\":\"uint256\"}],\"name\":\"resolveDispute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/KlerosIntegration.sol\":\"KlerosIntegration\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":10},\"remappings\":[],\"viaIR\":true},\"sources\":{\"project:/contracts/KlerosIntegration.sol\":{\"keccak256\":\"0x826aa2f44fb92991b19d2e9239a0a5f03df0eb4a4d430a3f38d305f4d748ca15\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7f242134e4a4c95bb02024c5ab76e0f51905d6f796d4a45e3712c29ae75af2e9\",\"dweb:/ipfs/QmWcc7CLp4Up1Z4C71L6bs5wj4uC1gTGyZbHzHajJV4Pkv\"]}},\"version\":1}",
+  "bytecode": "0x60803460705761064a80380390601f19601f83011683019183831067ffffffffffffffff84111760755780849260209460405283398101031260705751600160a060020a0381169081900360705760028054600160a060020a0319169190911790556040516105a590816100a58239f35b600080fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fdfe608080604052600436101561001357600080fd5b60e060020a60003504906350de9b4082146104eb57508063564a565d1461047f578063622efc2a146103d75780636cc6cde1146103ae5780639908ff061461017e578063a28889e1146101605763c2b7b8681461006f57600080fd5b3461015b57602036600319011261015b57600435806000526000602052600160406000200160ff60a060020a825404166003811015610141576001036100ea57805460a060020a60ff02191660a160020a1790557f57cce005d496355471bb5269f1dea3d6c81b6ac14c1d74ba28aefb022357013b600080a2005b60405160e560020a62461bcd02815260206004820152602360248201527f44697370757465206d75737420626520646973707574656420746f207265736f604482015260e860020a626c7665026064820152608490fd5b60e060020a634e487b710260009081526021600452602490fd5b600080fd5b3461015b57600036600319011261015b576020600154604051908152f35b3461015b57602036600319011261015b57600435600160a060020a0381169081900361015b5760015460001981146103945760010190816001556040516080810181811067ffffffffffffffff82111761037a5760409081523382526020808301848152600084840181815260608601828152978252928190529290922092518354600160a060020a0319908116600160a060020a03928316178555925160018501805490941691161782555193600385101561014157815460a060020a60ff02191660a060020a90950260a060020a60ff0216949094179055915160029283015590546040805160e060020a63c13517e10281526003600482015260248101919091526000604482018190529291602090829060649082908790600160a060020a03165af190811561036f578391610339575b506001805484526020848152604080862060020193909355815485528490529083208101805460a060020a60ff02191660a060020a179055549033827fa98740350a04e10bd52f7846736922efc8c45cf66834c194a975d83416861f228580a47f04901f83201c8724eadf084436db8aa391820bae6d11f9f78a17edb6f2eef3cf8280a280f35b90506020813d602011610367575b816103546020938361054d565b810103126103635751836102b2565b8280fd5b3d9150610347565b6040513d85823e3d90fd5b60e060020a634e487b710260009081526041600452602490fd5b60e060020a634e487b710260009081526011600452602490fd5b3461015b57600036600319011261015b57600254604051600160a060020a039091168152602090f35b3461015b57602036600319011261015b57600160a060020a03600254166004356000526000602052602060026040600020015460246040518094819360e060020a6320f7aa3f02835260048301525afa801561047357600090610440575b602090604051908152f35b506020813d60201161046b575b8161045a6020938361054d565b8101031261015b5760209051610435565b3d915061044d565b6040513d6000823e3d90fd5b3461015b57602036600319011261015b5760043560005260006020526040600020600160a060020a038154166001820154600260ff60a0820a83041693015490604051928352600160a060020a0316602083015260038310156101415760809260408301526060820152f35b3461015b57602036600319011261015b57602081602481600160a060020a03600254166004356000526000855260026040600020015460e660020a6301437a6d02835260048301525afa80156104735760009061044057602090604051908152f35b90601f8019910116810190811067ffffffffffffffff82111761037a5760405256fea2646970667358221220efcc25c273019ea5cbd33fff73382f10120e24b304595759c04de300e2afc09c64736f6c63430008220033",
+  "deployedBytecode": "0x608080604052600436101561001357600080fd5b60e060020a60003504906350de9b4082146104eb57508063564a565d1461047f578063622efc2a146103d75780636cc6cde1146103ae5780639908ff061461017e578063a28889e1146101605763c2b7b8681461006f57600080fd5b3461015b57602036600319011261015b57600435806000526000602052600160406000200160ff60a060020a825404166003811015610141576001036100ea57805460a060020a60ff02191660a160020a1790557f57cce005d496355471bb5269f1dea3d6c81b6ac14c1d74ba28aefb022357013b600080a2005b60405160e560020a62461bcd02815260206004820152602360248201527f44697370757465206d75737420626520646973707574656420746f207265736f604482015260e860020a626c7665026064820152608490fd5b60e060020a634e487b710260009081526021600452602490fd5b600080fd5b3461015b57600036600319011261015b576020600154604051908152f35b3461015b57602036600319011261015b57600435600160a060020a0381169081900361015b5760015460001981146103945760010190816001556040516080810181811067ffffffffffffffff82111761037a5760409081523382526020808301848152600084840181815260608601828152978252928190529290922092518354600160a060020a0319908116600160a060020a03928316178555925160018501805490941691161782555193600385101561014157815460a060020a60ff02191660a060020a90950260a060020a60ff0216949094179055915160029283015590546040805160e060020a63c13517e10281526003600482015260248101919091526000604482018190529291602090829060649082908790600160a060020a03165af190811561036f578391610339575b506001805484526020848152604080862060020193909355815485528490529083208101805460a060020a60ff02191660a060020a179055549033827fa98740350a04e10bd52f7846736922efc8c45cf66834c194a975d83416861f228580a47f04901f83201c8724eadf084436db8aa391820bae6d11f9f78a17edb6f2eef3cf8280a280f35b90506020813d602011610367575b816103546020938361054d565b810103126103635751836102b2565b8280fd5b3d9150610347565b6040513d85823e3d90fd5b60e060020a634e487b710260009081526041600452602490fd5b60e060020a634e487b710260009081526011600452602490fd5b3461015b57600036600319011261015b57600254604051600160a060020a039091168152602090f35b3461015b57602036600319011261015b57600160a060020a03600254166004356000526000602052602060026040600020015460246040518094819360e060020a6320f7aa3f02835260048301525afa801561047357600090610440575b602090604051908152f35b506020813d60201161046b575b8161045a6020938361054d565b8101031261015b5760209051610435565b3d915061044d565b6040513d6000823e3d90fd5b3461015b57602036600319011261015b5760043560005260006020526040600020600160a060020a038154166001820154600260ff60a0820a83041693015490604051928352600160a060020a0316602083015260038310156101415760809260408301526060820152f35b3461015b57602036600319011261015b57602081602481600160a060020a03600254166004356000526000855260026040600020015460e660020a6301437a6d02835260048301525afa80156104735760009061044057602090604051908152f35b90601f8019910116810190811067ffffffffffffffff82111761037a5760405256fea2646970667358221220efcc25c273019ea5cbd33fff73382f10120e24b304595759c04de300e2afc09c64736f6c63430008220033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "369:1924:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;-1:-1:-1;;;;;;369:1924:0;;;;;;;;;;;;;;;;;-1:-1:-1;369:1924:0;;;;-1:-1:-1;369:1924:0;;;;;-1:-1:-1;369:1924:0",
+  "deployedSourceMap": "369:1924:0:-:0;;;;;;;;;;;;;;-1:-1:-1;;;369:1924:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;369:1924:0;;;;;;;;;;;;;;;;1747:14;369:1924;;;;;;;;;;;;;;;1747:33;369:1924;;;;-1:-1:-1;;;;;;369:1924:0;-1:-1:-1;;;369:1924:0;;;1881:27;-1:-1:-1;;1881:27:0;369:1924;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;369:1924:0;;;;;641:27;369:1924;;;;;;;;;;;;;-1:-1:-1;;369:1924:0;;;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;1064:14;369:1924;-1:-1:-1;;369:1924:0;;;;1064:14;369:1924;;;1064:14;369:1924;;;;;;;;;;;;;;;;;;;1145:10;369:1924;;;1114:147;;;369:1924;;;-1:-1:-1;1114:147:0;;;369:1924;;;1114:147;;;369:1924;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;369:1924:0;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;369:1924:0;-1:-1:-1;;;369:1924:0;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1350:46:0;;369:1924;;1350:46;;369:1924;;;;;;;;;;;;;;;;-1:-1:-1;369:1924:0;;;;1350:46;;369:1924;;;;-1:-1:-1;;;;;369:1924:0;1350:46;;;;;;;;;;;369:1924;-1:-1:-1;1064:14:0;369:1924;;;;;;;;;;;;;1315:32;369:1924;;;;;;;;;;;;;;1445:29;;369:1924;;-1:-1:-1;;;;;;369:1924:0;-1:-1:-1;;;369:1924:0;;;;;1145:10;369:1924;1510:49;369:1924;;1510:49;1575:27;;;;369:1924;;1350:46;;;369:1924;1350:46;;369:1924;1350:46;;;;;;369:1924;1350:46;;;:::i;:::-;;;369:1924;;;;;1350:46;;;369:1924;;;;1350:46;;;-1:-1:-1;1350:46:0;;;369:1924;;;;;;;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;;;;;;-1:-1:-1;;369:1924:0;;;;;;;;-1:-1:-1;;;;;369:1924:0;;;;;;;;;;;;;;-1:-1:-1;;369:1924:0;;;;;;;;;2036:10;369:1924;;;;;;;;;;2036:10;369:1924;;;2065:30;369:1924;2022:74;369:1924;;;;;;;;;;;2022:74;;369:1924;2022:74;;369:1924;2022:74;;;;;;369:1924;2022:74;;;369:1924;;;;;;;;;2022:74;;369:1924;2022:74;;369:1924;2022:74;;;;;;369:1924;2022:74;;;:::i;:::-;;;369:1924;;;;;;;2022:74;;;;;-1:-1:-1;2022:74:0;;;369:1924;;;;;;;;;;;;;;;-1:-1:-1;;369:1924:0;;;;;;;;;;;;;;;;;;;;;;;591:43;;369:1924;591:43;369:1924;;;;;;;591:43;;369:1924;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;369:1924:0;;;;;;2208:74;369:1924;;;;;;2222:10;369:1924;;;;;;;;;2222:10;369:1924;;;2251:30;369:1924;;;;;;2208:74;;369:1924;2208:74;;369:1924;2208:74;;;;;;369:1924;2208:74;;;369:1924;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ninterface IKlerosLiquid {\r\n    function createDispute(uint256 _numberOfChoices, bytes calldata _extraData) external returns (uint256);\r\n    function getDisputeStatus(uint256 _disputeId) external view returns (uint256);\r\n    function getDisputeResult(uint256 _disputeId) external view returns (uint256);\r\n}\r\n\r\ncontract KlerosIntegration {\r\n    enum Status { Pending, Disputed, Resolved }\r\n    \r\n    struct Dispute {\r\n        address partyA;\r\n        address partyB;\r\n        Status status;\r\n        uint256 disputeId;\r\n    }\r\n\r\n    mapping(uint256 => Dispute) public disputes;\r\n    uint256 public disputeCount;\r\n    address public arbitrator;\r\n\r\n    event DisputeCreated(uint256 indexed disputeId, address indexed partyA, address indexed partyB);\r\n    event DisputeRaised(uint256 indexed disputeId);\r\n    event DisputeResolved(uint256 indexed disputeId);\r\n\r\n    constructor(address _arbitrator) {\r\n        arbitrator = _arbitrator;\r\n    }\r\n\r\n    function raiseDispute(address _partyB) external {\r\n        disputeCount++;\r\n        disputes[disputeCount] = Dispute({\r\n            partyA: msg.sender,\r\n            partyB: _partyB,\r\n            status: Status.Pending,\r\n            disputeId: 0\r\n        });\r\n\r\n        // Create a dispute with Kleros\r\n        disputes[disputeCount].disputeId = IKlerosLiquid(arbitrator).createDispute(3, \"\"); // Assuming 3 choices for the dispute\r\n        disputes[disputeCount].status = Status.Disputed;\r\n\r\n        emit DisputeCreated(disputeCount, msg.sender, _partyB);\r\n        emit DisputeRaised(disputeCount);\r\n    }\r\n\r\n    function resolveDispute(uint256 _disputeId) external {\r\n        Dispute storage dispute = disputes[_disputeId];\r\n        require(dispute.status == Status.Disputed, \"Dispute must be disputed to resolve\");\r\n\r\n        dispute.status = Status.Resolved;\r\n        emit DisputeResolved(_disputeId);\r\n    }\r\n\r\n    function checkDisputeStatus(uint256 _disputeId) external view returns (uint256) {\r\n        return IKlerosLiquid(arbitrator).getDisputeStatus(disputes[_disputeId].disputeId);\r\n    }\r\n\r\n    function getDisputeResult(uint256 _disputeId) external view returns (uint256) {\r\n        return IKlerosLiquid(arbitrator).getDisputeResult(disputes[_disputeId].disputeId);\r\n    }\r\n}\r\n",
+  "sourcePath": "D:\\btech\\4 th Year\\Major Project\\Freelance\\Delance\\truffle_project\\contracts\\KlerosIntegration.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/KlerosIntegration.sol",
+    "exportedSymbols": {
+      "IKlerosLiquid": [
+        25
+      ],
+      "KlerosIntegration": [
+        198
+      ]
+    },
+    "id": 199,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IKlerosLiquid",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 25,
+        "linearizedBaseContracts": [
+          25
+        ],
+        "name": "IKlerosLiquid",
+        "nameLocation": "70:13:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "c13517e1",
+            "id": 10,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createDispute",
+            "nameLocation": "100:13:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3,
+                  "mutability": "mutable",
+                  "name": "_numberOfChoices",
+                  "nameLocation": "122:16:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10,
+                  "src": "114:24:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "114:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5,
+                  "mutability": "mutable",
+                  "name": "_extraData",
+                  "nameLocation": "155:10:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10,
+                  "src": "140:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 4,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "140:5:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "113:53:0"
+            },
+            "returnParameters": {
+              "id": 9,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 8,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10,
+                  "src": "185:7:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "185:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "184:9:0"
+            },
+            "scope": 25,
+            "src": "91:103:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "20f7aa3f",
+            "id": 17,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getDisputeStatus",
+            "nameLocation": "209:16:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12,
+                  "mutability": "mutable",
+                  "name": "_disputeId",
+                  "nameLocation": "234:10:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17,
+                  "src": "226:18:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "226:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "225:20:0"
+            },
+            "returnParameters": {
+              "id": 16,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 15,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17,
+                  "src": "269:7:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 14,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "269:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "268:9:0"
+            },
+            "scope": 25,
+            "src": "200:78:0",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "50de9b40",
+            "id": 24,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getDisputeResult",
+            "nameLocation": "293:16:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 20,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 19,
+                  "mutability": "mutable",
+                  "name": "_disputeId",
+                  "nameLocation": "318:10:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 24,
+                  "src": "310:18:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 18,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "310:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "309:20:0"
+            },
+            "returnParameters": {
+              "id": 23,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 22,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 24,
+                  "src": "353:7:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "353:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "352:9:0"
+            },
+            "scope": 25,
+            "src": "284:78:0",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 199,
+        "src": "60:305:0",
+        "usedErrors": [],
+        "usedEvents": []
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "KlerosIntegration",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 198,
+        "linearizedBaseContracts": [
+          198
+        ],
+        "name": "KlerosIntegration",
+        "nameLocation": "378:17:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "KlerosIntegration.Status",
+            "id": 29,
+            "members": [
+              {
+                "id": 26,
+                "name": "Pending",
+                "nameLocation": "417:7:0",
+                "nodeType": "EnumValue",
+                "src": "417:7:0"
+              },
+              {
+                "id": 27,
+                "name": "Disputed",
+                "nameLocation": "426:8:0",
+                "nodeType": "EnumValue",
+                "src": "426:8:0"
+              },
+              {
+                "id": 28,
+                "name": "Resolved",
+                "nameLocation": "436:8:0",
+                "nodeType": "EnumValue",
+                "src": "436:8:0"
+              }
+            ],
+            "name": "Status",
+            "nameLocation": "408:6:0",
+            "nodeType": "EnumDefinition",
+            "src": "403:43:0"
+          },
+          {
+            "canonicalName": "KlerosIntegration.Dispute",
+            "id": 39,
+            "members": [
+              {
+                "constant": false,
+                "id": 31,
+                "mutability": "mutable",
+                "name": "partyA",
+                "nameLocation": "492:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 39,
+                "src": "484:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 30,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "484:7:0",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 33,
+                "mutability": "mutable",
+                "name": "partyB",
+                "nameLocation": "517:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 39,
+                "src": "509:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 32,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "509:7:0",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 36,
+                "mutability": "mutable",
+                "name": "status",
+                "nameLocation": "541:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 39,
+                "src": "534:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_Status_$29",
+                  "typeString": "enum KlerosIntegration.Status"
+                },
+                "typeName": {
+                  "id": 35,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 34,
+                    "name": "Status",
+                    "nameLocations": [
+                      "534:6:0"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 29,
+                    "src": "534:6:0"
+                  },
+                  "referencedDeclaration": 29,
+                  "src": "534:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_Status_$29",
+                    "typeString": "enum KlerosIntegration.Status"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 38,
+                "mutability": "mutable",
+                "name": "disputeId",
+                "nameLocation": "566:9:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 39,
+                "src": "558:17:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "558:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Dispute",
+            "nameLocation": "465:7:0",
+            "nodeType": "StructDefinition",
+            "scope": 198,
+            "src": "458:125:0",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "564a565d",
+            "id": 44,
+            "mutability": "mutable",
+            "name": "disputes",
+            "nameLocation": "626:8:0",
+            "nodeType": "VariableDeclaration",
+            "scope": 198,
+            "src": "591:43:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+              "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute)"
+            },
+            "typeName": {
+              "id": 43,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 40,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "599:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "591:27:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+                "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 42,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 41,
+                  "name": "Dispute",
+                  "nameLocations": [
+                    "610:7:0"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 39,
+                  "src": "610:7:0"
+                },
+                "referencedDeclaration": 39,
+                "src": "610:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Dispute_$39_storage_ptr",
+                  "typeString": "struct KlerosIntegration.Dispute"
+                }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "a28889e1",
+            "id": 46,
+            "mutability": "mutable",
+            "name": "disputeCount",
+            "nameLocation": "656:12:0",
+            "nodeType": "VariableDeclaration",
+            "scope": 198,
+            "src": "641:27:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 45,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "641:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "6cc6cde1",
+            "id": 48,
+            "mutability": "mutable",
+            "name": "arbitrator",
+            "nameLocation": "690:10:0",
+            "nodeType": "VariableDeclaration",
+            "scope": 198,
+            "src": "675:25:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 47,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "675:7:0",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "a98740350a04e10bd52f7846736922efc8c45cf66834c194a975d83416861f22",
+            "id": 56,
+            "name": "DisputeCreated",
+            "nameLocation": "715:14:0",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 55,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 50,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "disputeId",
+                  "nameLocation": "746:9:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 56,
+                  "src": "730:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 49,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "730:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 52,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "partyA",
+                  "nameLocation": "773:6:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 56,
+                  "src": "757:22:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 51,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "757:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 54,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "partyB",
+                  "nameLocation": "797:6:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 56,
+                  "src": "781:22:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 53,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "781:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "729:75:0"
+            },
+            "src": "709:96:0"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "04901f83201c8724eadf084436db8aa391820bae6d11f9f78a17edb6f2eef3cf",
+            "id": 60,
+            "name": "DisputeRaised",
+            "nameLocation": "817:13:0",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 59,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 58,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "disputeId",
+                  "nameLocation": "847:9:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 60,
+                  "src": "831:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 57,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "831:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "830:27:0"
+            },
+            "src": "811:47:0"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "57cce005d496355471bb5269f1dea3d6c81b6ac14c1d74ba28aefb022357013b",
+            "id": 64,
+            "name": "DisputeResolved",
+            "nameLocation": "870:15:0",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 63,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 62,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "disputeId",
+                  "nameLocation": "902:9:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 64,
+                  "src": "886:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 61,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "886:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "885:27:0"
+            },
+            "src": "864:49:0"
+          },
+          {
+            "body": {
+              "id": 73,
+              "nodeType": "Block",
+              "src": "954:43:0",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 71,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 69,
+                      "name": "arbitrator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 48,
+                      "src": "965:10:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 70,
+                      "name": "_arbitrator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 66,
+                      "src": "978:11:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "965:24:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 72,
+                  "nodeType": "ExpressionStatement",
+                  "src": "965:24:0"
+                }
+              ]
+            },
+            "id": 74,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 67,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 66,
+                  "mutability": "mutable",
+                  "name": "_arbitrator",
+                  "nameLocation": "941:11:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 74,
+                  "src": "933:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 65,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "933:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "932:21:0"
+            },
+            "returnParameters": {
+              "id": 68,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "954:0:0"
+            },
+            "scope": 198,
+            "src": "921:76:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 127,
+              "nodeType": "Block",
+              "src": "1053:557:0",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 80,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "++",
+                    "prefix": false,
+                    "src": "1064:14:0",
+                    "subExpression": {
+                      "id": 79,
+                      "name": "disputeCount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 46,
+                      "src": "1064:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 81,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1064:14:0"
+                },
+                {
+                  "expression": {
+                    "id": 93,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "id": 82,
+                        "name": "disputes",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 44,
+                        "src": "1089:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+                          "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute storage ref)"
+                        }
+                      },
+                      "id": 84,
+                      "indexExpression": {
+                        "id": 83,
+                        "name": "disputeCount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 46,
+                        "src": "1098:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1089:22:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Dispute_$39_storage",
+                        "typeString": "struct KlerosIntegration.Dispute storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 86,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4294967281,
+                            "src": "1145:3:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 87,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1149:6:0",
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "src": "1145:10:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "id": 88,
+                          "name": "_partyB",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 76,
+                          "src": "1178:7:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "expression": {
+                            "id": 89,
+                            "name": "Status",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 29,
+                            "src": "1208:6:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_Status_$29_$",
+                              "typeString": "type(enum KlerosIntegration.Status)"
+                            }
+                          },
+                          "id": 90,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberLocation": "1215:7:0",
+                          "memberName": "Pending",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 26,
+                          "src": "1208:14:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_Status_$29",
+                            "typeString": "enum KlerosIntegration.Status"
+                          }
+                        },
+                        {
+                          "hexValue": "30",
+                          "id": 91,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1248:1:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_enum$_Status_$29",
+                            "typeString": "enum KlerosIntegration.Status"
+                          },
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          }
+                        ],
+                        "id": 85,
+                        "name": "Dispute",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 39,
+                        "src": "1114:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_Dispute_$39_storage_ptr_$",
+                          "typeString": "type(struct KlerosIntegration.Dispute storage pointer)"
+                        }
+                      },
+                      "id": 92,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "nameLocations": [
+                        "1137:6:0",
+                        "1170:6:0",
+                        "1200:6:0",
+                        "1237:9:0"
+                      ],
+                      "names": [
+                        "partyA",
+                        "partyB",
+                        "status",
+                        "disputeId"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "1114:147:0",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Dispute_$39_memory_ptr",
+                        "typeString": "struct KlerosIntegration.Dispute memory"
+                      }
+                    },
+                    "src": "1089:172:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Dispute_$39_storage",
+                      "typeString": "struct KlerosIntegration.Dispute storage ref"
+                    }
+                  },
+                  "id": 94,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1089:172:0"
+                },
+                {
+                  "expression": {
+                    "id": 106,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "baseExpression": {
+                          "id": 95,
+                          "name": "disputes",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 44,
+                          "src": "1315:8:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+                            "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute storage ref)"
+                          }
+                        },
+                        "id": 97,
+                        "indexExpression": {
+                          "id": 96,
+                          "name": "disputeCount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 46,
+                          "src": "1324:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1315:22:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Dispute_$39_storage",
+                          "typeString": "struct KlerosIntegration.Dispute storage ref"
+                        }
+                      },
+                      "id": 98,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "1338:9:0",
+                      "memberName": "disputeId",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 38,
+                      "src": "1315:32:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "hexValue": "33",
+                          "id": 103,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1390:1:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_3_by_1",
+                            "typeString": "int_const 3"
+                          },
+                          "value": "3"
+                        },
+                        {
+                          "hexValue": "",
+                          "id": 104,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "string",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1393:2:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                            "typeString": "literal_string \"\""
+                          },
+                          "value": ""
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_3_by_1",
+                            "typeString": "int_const 3"
+                          },
+                          {
+                            "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                            "typeString": "literal_string \"\""
+                          }
+                        ],
+                        "expression": {
+                          "arguments": [
+                            {
+                              "id": 100,
+                              "name": "arbitrator",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 48,
+                              "src": "1364:10:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 99,
+                            "name": "IKlerosLiquid",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 25,
+                            "src": "1350:13:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_IKlerosLiquid_$25_$",
+                              "typeString": "type(contract IKlerosLiquid)"
+                            }
+                          },
+                          "id": 101,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1350:25:0",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IKlerosLiquid_$25",
+                            "typeString": "contract IKlerosLiquid"
+                          }
+                        },
+                        "id": 102,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1376:13:0",
+                        "memberName": "createDispute",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 10,
+                        "src": "1350:39:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_bytes_memory_ptr_$returns$_t_uint256_$",
+                          "typeString": "function (uint256,bytes memory) external returns (uint256)"
+                        }
+                      },
+                      "id": 105,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1350:46:0",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1315:81:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 107,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1315:81:0"
+                },
+                {
+                  "expression": {
+                    "id": 114,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "baseExpression": {
+                          "id": 108,
+                          "name": "disputes",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 44,
+                          "src": "1445:8:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+                            "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute storage ref)"
+                          }
+                        },
+                        "id": 110,
+                        "indexExpression": {
+                          "id": 109,
+                          "name": "disputeCount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 46,
+                          "src": "1454:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1445:22:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Dispute_$39_storage",
+                          "typeString": "struct KlerosIntegration.Dispute storage ref"
+                        }
+                      },
+                      "id": 111,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "1468:6:0",
+                      "memberName": "status",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 36,
+                      "src": "1445:29:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_Status_$29",
+                        "typeString": "enum KlerosIntegration.Status"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "expression": {
+                        "id": 112,
+                        "name": "Status",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 29,
+                        "src": "1477:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_Status_$29_$",
+                          "typeString": "type(enum KlerosIntegration.Status)"
+                        }
+                      },
+                      "id": 113,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "1484:8:0",
+                      "memberName": "Disputed",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 27,
+                      "src": "1477:15:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_Status_$29",
+                        "typeString": "enum KlerosIntegration.Status"
+                      }
+                    },
+                    "src": "1445:47:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_Status_$29",
+                      "typeString": "enum KlerosIntegration.Status"
+                    }
+                  },
+                  "id": 115,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1445:47:0"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 117,
+                        "name": "disputeCount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 46,
+                        "src": "1525:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "expression": {
+                          "id": 118,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4294967281,
+                          "src": "1539:3:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 119,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1543:6:0",
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "src": "1539:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 120,
+                        "name": "_partyB",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 76,
+                        "src": "1551:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 116,
+                      "name": "DisputeCreated",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 56,
+                      "src": "1510:14:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_address_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,address,address)"
+                      }
+                    },
+                    "id": 121,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1510:49:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 122,
+                  "nodeType": "EmitStatement",
+                  "src": "1505:54:0"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 124,
+                        "name": "disputeCount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 46,
+                        "src": "1589:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 123,
+                      "name": "DisputeRaised",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60,
+                      "src": "1575:13:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 125,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1575:27:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 126,
+                  "nodeType": "EmitStatement",
+                  "src": "1570:32:0"
+                }
+              ]
+            },
+            "functionSelector": "9908ff06",
+            "id": 128,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "raiseDispute",
+            "nameLocation": "1014:12:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 77,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 76,
+                  "mutability": "mutable",
+                  "name": "_partyB",
+                  "nameLocation": "1035:7:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 128,
+                  "src": "1027:15:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 75,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1027:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1026:17:0"
+            },
+            "returnParameters": {
+              "id": 78,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1053:0:0"
+            },
+            "scope": 198,
+            "src": "1005:605:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 160,
+              "nodeType": "Block",
+              "src": "1671:245:0",
+              "statements": [
+                {
+                  "assignments": [
+                    135
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 135,
+                      "mutability": "mutable",
+                      "name": "dispute",
+                      "nameLocation": "1698:7:0",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 160,
+                      "src": "1682:23:0",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Dispute_$39_storage_ptr",
+                        "typeString": "struct KlerosIntegration.Dispute"
+                      },
+                      "typeName": {
+                        "id": 134,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 133,
+                          "name": "Dispute",
+                          "nameLocations": [
+                            "1682:7:0"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 39,
+                          "src": "1682:7:0"
+                        },
+                        "referencedDeclaration": 39,
+                        "src": "1682:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Dispute_$39_storage_ptr",
+                          "typeString": "struct KlerosIntegration.Dispute"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 139,
+                  "initialValue": {
+                    "baseExpression": {
+                      "id": 136,
+                      "name": "disputes",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 44,
+                      "src": "1708:8:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+                        "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute storage ref)"
+                      }
+                    },
+                    "id": 138,
+                    "indexExpression": {
+                      "id": 137,
+                      "name": "_disputeId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 130,
+                      "src": "1717:10:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1708:20:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Dispute_$39_storage",
+                      "typeString": "struct KlerosIntegration.Dispute storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1682:46:0"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_enum$_Status_$29",
+                          "typeString": "enum KlerosIntegration.Status"
+                        },
+                        "id": 145,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 141,
+                            "name": "dispute",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 135,
+                            "src": "1747:7:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Dispute_$39_storage_ptr",
+                              "typeString": "struct KlerosIntegration.Dispute storage pointer"
+                            }
+                          },
+                          "id": 142,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1755:6:0",
+                          "memberName": "status",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 36,
+                          "src": "1747:14:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_Status_$29",
+                            "typeString": "enum KlerosIntegration.Status"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "expression": {
+                            "id": 143,
+                            "name": "Status",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 29,
+                            "src": "1765:6:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_Status_$29_$",
+                              "typeString": "type(enum KlerosIntegration.Status)"
+                            }
+                          },
+                          "id": 144,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberLocation": "1772:8:0",
+                          "memberName": "Disputed",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 27,
+                          "src": "1765:15:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_Status_$29",
+                            "typeString": "enum KlerosIntegration.Status"
+                          }
+                        },
+                        "src": "1747:33:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "44697370757465206d75737420626520646973707574656420746f207265736f6c7665",
+                        "id": 146,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1782:37:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_4f064541f10d0a82df8977ffcd0be6c1436b3fb7b8317878e3ccc2e2f4723622",
+                          "typeString": "literal_string \"Dispute must be disputed to resolve\""
+                        },
+                        "value": "Dispute must be disputed to resolve"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_4f064541f10d0a82df8977ffcd0be6c1436b3fb7b8317878e3ccc2e2f4723622",
+                          "typeString": "literal_string \"Dispute must be disputed to resolve\""
+                        }
+                      ],
+                      "id": 140,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "1739:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 147,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1739:81:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 148,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1739:81:0"
+                },
+                {
+                  "expression": {
+                    "id": 154,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 149,
+                        "name": "dispute",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 135,
+                        "src": "1833:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Dispute_$39_storage_ptr",
+                          "typeString": "struct KlerosIntegration.Dispute storage pointer"
+                        }
+                      },
+                      "id": 151,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "1841:6:0",
+                      "memberName": "status",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 36,
+                      "src": "1833:14:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_Status_$29",
+                        "typeString": "enum KlerosIntegration.Status"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "expression": {
+                        "id": 152,
+                        "name": "Status",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 29,
+                        "src": "1850:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_Status_$29_$",
+                          "typeString": "type(enum KlerosIntegration.Status)"
+                        }
+                      },
+                      "id": 153,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "1857:8:0",
+                      "memberName": "Resolved",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 28,
+                      "src": "1850:15:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_Status_$29",
+                        "typeString": "enum KlerosIntegration.Status"
+                      }
+                    },
+                    "src": "1833:32:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_Status_$29",
+                      "typeString": "enum KlerosIntegration.Status"
+                    }
+                  },
+                  "id": 155,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1833:32:0"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 157,
+                        "name": "_disputeId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 130,
+                        "src": "1897:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 156,
+                      "name": "DisputeResolved",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 64,
+                      "src": "1881:15:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 158,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1881:27:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 159,
+                  "nodeType": "EmitStatement",
+                  "src": "1876:32:0"
+                }
+              ]
+            },
+            "functionSelector": "c2b7b868",
+            "id": 161,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "resolveDispute",
+            "nameLocation": "1627:14:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 131,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 130,
+                  "mutability": "mutable",
+                  "name": "_disputeId",
+                  "nameLocation": "1650:10:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 161,
+                  "src": "1642:18:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 129,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1642:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1641:20:0"
+            },
+            "returnParameters": {
+              "id": 132,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1671:0:0"
+            },
+            "scope": 198,
+            "src": "1618:298:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 178,
+              "nodeType": "Block",
+              "src": "2004:100:0",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "baseExpression": {
+                            "id": 172,
+                            "name": "disputes",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 44,
+                            "src": "2065:8:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+                              "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute storage ref)"
+                            }
+                          },
+                          "id": 174,
+                          "indexExpression": {
+                            "id": 173,
+                            "name": "_disputeId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 163,
+                            "src": "2074:10:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "2065:20:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Dispute_$39_storage",
+                            "typeString": "struct KlerosIntegration.Dispute storage ref"
+                          }
+                        },
+                        "id": 175,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2086:9:0",
+                        "memberName": "disputeId",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 38,
+                        "src": "2065:30:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "arguments": [
+                          {
+                            "id": 169,
+                            "name": "arbitrator",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 48,
+                            "src": "2036:10:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 168,
+                          "name": "IKlerosLiquid",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 25,
+                          "src": "2022:13:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_IKlerosLiquid_$25_$",
+                            "typeString": "type(contract IKlerosLiquid)"
+                          }
+                        },
+                        "id": 170,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2022:25:0",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IKlerosLiquid_$25",
+                          "typeString": "contract IKlerosLiquid"
+                        }
+                      },
+                      "id": 171,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2048:16:0",
+                      "memberName": "getDisputeStatus",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 17,
+                      "src": "2022:42:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_uint256_$",
+                        "typeString": "function (uint256) view external returns (uint256)"
+                      }
+                    },
+                    "id": 176,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2022:74:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 167,
+                  "id": 177,
+                  "nodeType": "Return",
+                  "src": "2015:81:0"
+                }
+              ]
+            },
+            "functionSelector": "622efc2a",
+            "id": 179,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "checkDisputeStatus",
+            "nameLocation": "1933:18:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 164,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 163,
+                  "mutability": "mutable",
+                  "name": "_disputeId",
+                  "nameLocation": "1960:10:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 179,
+                  "src": "1952:18:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 162,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1952:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1951:20:0"
+            },
+            "returnParameters": {
+              "id": 167,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 166,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 179,
+                  "src": "1995:7:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 165,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1995:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1994:9:0"
+            },
+            "scope": 198,
+            "src": "1924:180:0",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 196,
+              "nodeType": "Block",
+              "src": "2190:100:0",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "baseExpression": {
+                            "id": 190,
+                            "name": "disputes",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 44,
+                            "src": "2251:8:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Dispute_$39_storage_$",
+                              "typeString": "mapping(uint256 => struct KlerosIntegration.Dispute storage ref)"
+                            }
+                          },
+                          "id": 192,
+                          "indexExpression": {
+                            "id": 191,
+                            "name": "_disputeId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 181,
+                            "src": "2260:10:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "2251:20:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Dispute_$39_storage",
+                            "typeString": "struct KlerosIntegration.Dispute storage ref"
+                          }
+                        },
+                        "id": 193,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2272:9:0",
+                        "memberName": "disputeId",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 38,
+                        "src": "2251:30:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "arguments": [
+                          {
+                            "id": 187,
+                            "name": "arbitrator",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 48,
+                            "src": "2222:10:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 186,
+                          "name": "IKlerosLiquid",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 25,
+                          "src": "2208:13:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_IKlerosLiquid_$25_$",
+                            "typeString": "type(contract IKlerosLiquid)"
+                          }
+                        },
+                        "id": 188,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2208:25:0",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IKlerosLiquid_$25",
+                          "typeString": "contract IKlerosLiquid"
+                        }
+                      },
+                      "id": 189,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2234:16:0",
+                      "memberName": "getDisputeResult",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 24,
+                      "src": "2208:42:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_uint256_$",
+                        "typeString": "function (uint256) view external returns (uint256)"
+                      }
+                    },
+                    "id": 194,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2208:74:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 185,
+                  "id": 195,
+                  "nodeType": "Return",
+                  "src": "2201:81:0"
+                }
+              ]
+            },
+            "functionSelector": "50de9b40",
+            "id": 197,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getDisputeResult",
+            "nameLocation": "2121:16:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 182,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 181,
+                  "mutability": "mutable",
+                  "name": "_disputeId",
+                  "nameLocation": "2146:10:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 197,
+                  "src": "2138:18:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 180,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2138:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2137:20:0"
+            },
+            "returnParameters": {
+              "id": 185,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 184,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 197,
+                  "src": "2181:7:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 183,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2181:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2180:9:0"
+            },
+            "scope": 198,
+            "src": "2112:178:0",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 199,
+        "src": "369:1924:0",
+        "usedErrors": [],
+        "usedEvents": [
+          56,
+          60,
+          64
+        ]
+      }
+    ],
+    "src": "33:2262:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.34+commit.80d5c536.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x2bc7757872fe60C310F2795A901B1012382404C8",
+      "transactionHash": "0x7492d64f4884ebcf578a81081e7d874db4b38ad80253f36624b7678dc6f30ed7"
+    },
+    "11155111": {
+      "events": {},
+      "links": {},
+      "address": "0x6b9e04d4c07196A7806BB58a3cc032a7F2999954",
+      "transactionHash": "0x7af8d35bdcbfa677ac50de67530162c94f30808153724ff1a33e094f20ffabca"
+    }
+  },
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2026-03-22T17:55:24.873Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

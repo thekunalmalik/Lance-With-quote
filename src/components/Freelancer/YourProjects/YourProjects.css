@@ -1,0 +1,30 @@
+/* YourProjects.css */
+.your-projects-container {
+    padding: 20px; /* Add some padding around the container */
+  }
+  
+  .your-projects-title {
+    text-align: center; /* Center the title */
+    margin-bottom: 20px; /* Add space below the title */
+    font-size: 24px; /* Increase font size for visibility */
+  }
+  
+  .projects-grid {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Space between grid items */
+  }
+  
+  .project-card {
+    background-color: #f9f9f9; /* Background color for project cards */
+    border: 1px solid #ddd; /* Border around cards */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Inner spacing for cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+  }
+  
+  .project-card:hover {
+    transform: scale(1.05); /* Scale up on hover */
+  }
+  

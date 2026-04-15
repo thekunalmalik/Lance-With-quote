@@ -1,0 +1,37 @@
+/* Container for the freelancer dashboard */
+.freelancer-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f7f7f7;
+    min-height: 100vh;
+}
+
+/* Title styling */
+.freelancer-title {
+    color: #2a7ae2;
+    margin-bottom: 20px;
+}
+
+/* Info paragraphs for connected account, balance, and rating */
+.freelancer-info {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+/* Button styling for actions */
+.freelancer-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #2a7ae2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.freelancer-button:hover {
+    background-color: #1b5c9a;
+}

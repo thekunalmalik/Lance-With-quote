@@ -1,0 +1,284 @@
+.quotation-card {
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.quotation-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+}
+
+.quotation-card.status-proposed {
+  border-left: 5px solid #ffc107;
+}
+
+.quotation-card.status-negotiating {
+  border-left: 5px solid #17a2b8;
+}
+
+.quotation-card.status-accepted {
+  border-left: 5px solid #28a745;
+  background: #f0f8f0;
+}
+
+.quotation-card.status-rejected {
+  border-left: 5px solid #dc3545;
+  background: #f8f0f0;
+  opacity: 0.8;
+}
+
+.quotation-card.status-pending {
+  border-left: 5px solid #999;
+}
+
+.quotation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.quotation-from {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.freelancer-badge {
+  background-color: #e7f3ff;
+  color: #0066cc;
+}
+
+.freelancer-address {
+  font-size: 12px;
+  color: #666;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+}
+
+.quotation-status {
+  text-align: right;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-badge.status-proposed {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.status-negotiating {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-badge.status-accepted {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-badge.status-rejected {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.status-badge.status-pending {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.quotation-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.quotation-amount .label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.quotation-amount .amount {
+  font-size: 18px;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.quotation-amount .difference {
+  font-size: 11px;
+  color: #999;
+  font-style: italic;
+}
+
+.quotation-description {
+  margin-bottom: 15px;
+}
+
+.quotation-description .label,
+.quotation-notes .label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.quotation-description p,
+.quotation-notes p {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.quotation-notes {
+  margin-bottom: 15px;
+  padding: 12px;
+  background: #f0f8ff;
+  border-left: 3px solid #0066cc;
+  border-radius: 4px;
+}
+
+.quotation-timestamp {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.quotation-timestamp small {
+  color: #999;
+  font-size: 11px;
+}
+
+.quotation-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: capitalize;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-accept {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-accept:hover:not(:disabled) {
+  background-color: #218838;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-reject {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-reject:hover:not(:disabled) {
+  background-color: #c82333;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.quotation-accepted-message,
+.quotation-rejected-message {
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.quotation-accepted-message {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.quotation-rejected-message {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  border-left: 3px solid #842029;
+}
+
+.success-message {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  border-left: 3px solid #0f5132;
+}
+
+@media (max-width: 480px) {
+  .quotation-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quotation-status {
+    text-align: left;
+  }
+
+  .quotation-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    min-width: unset;
+  }
+}

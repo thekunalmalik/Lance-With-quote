@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Test</title>
+</head>
+<body>
+    <h1>Upload a Text File</h1>
+    <input type="file" id="fileInput" accept=".txt" />
+    <button id="uploadButton">Upload</button>
+
+    <script>
+        document.getElementById('uploadButton').addEventListener('click', function() {
+            var myHeaders = new Headers();
+            myHeaders.append("x-api-key", "QN_7277bc6ceed1460e85b6cfa8e1f123a9");
+
+            var fileInput = document.getElementById('fileInput');
+            var formdata = new FormData();
+
+            // Ensure a file has been selected
+            if (fileInput.files.length > 0) {
+                formdata.append("Body", fileInput.files[0], fileInput.files[0].name); // Use the selected file
+                formdata.append("Key", fileInput.files[0].name); // Use the file name as key
+                formdata.append("ContentType", "text/plain"); // Set content type for a text file
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: formdata,
+                    redirect: 'follow'
+                };
+
+                fetch("https://api.quicknode.com/ipfs/rest/v1/s3/put-object", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+            } else {
+                alert("Please select a file to upload.");
+            }
+        });
+    </script>
+</body>
+</html>
