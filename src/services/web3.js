@@ -3,6 +3,11 @@ import ProjectsContract from '../contracts/Projects.json';
 import RequestManagerContract from '../contracts/RequestManager.json';
 import { downloadFileFromIPFS } from './ipfs';
 
+const LOCAL_GANACHE_ADDRESSES = {
+  Projects: '0x2dc7fD1C2A38960D5691543bFBCCC7893B5C83A9',
+  RequestManager: '0xA28A1F4962fEA809991ec5bC093A367A21eF74eE'
+};
+
 // helper to pick contract address from deployed networks or fall back to an env var
 const getDeployedAddress = async (web3, contractJson, envVar) => {
   // prefer explicit env var for situations like hosted testnet
@@ -14,6 +19,13 @@ const getDeployedAddress = async (web3, contractJson, envVar) => {
   const networkId = await web3.eth.net.getId();
   console.log(`Detected network ID: ${networkId}, contract: ${contractJson.contractName}`);
   
+  // Override stale local Ganache addresses with the current deployed contract addresses
+  if (networkId === 5777 && LOCAL_GANACHE_ADDRESSES[contractJson.contractName]) {
+    const address = LOCAL_GANACHE_ADDRESSES[contractJson.contractName];
+    console.log(`Using hardcoded Ganache address for ${contractJson.contractName}: ${address}`);
+    return address;
+  }
+
   if (contractJson.networks && contractJson.networks[networkId]) {
     const address = contractJson.networks[networkId].address;
     console.log(`Found address for network ${networkId}: ${address}`);

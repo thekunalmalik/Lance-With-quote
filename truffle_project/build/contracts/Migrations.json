@@ -57,7 +57,7 @@
   "sourceMap": "27:323:1:-:0;;;;;;;141:18;27:323;;-1:-1:-1;;;;;;27:323:1;149:10;27:323;;;;;;;;;;;;;",
   "deployedSourceMap": "27:323:1:-:0;;;;;;;;;;;;;;-1:-1:-1;;;27:323:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;27:323:1;;;;;;-1:-1:-1;;;;;27:323:1;231:10;:19;27:323;;;;;;;;;;-1:-1:-1;;;;;27:323:1;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;27:323:1;;;;;;;;;;;;;;;;;-1:-1:-1;;27:323:1;;;;;;;;-1:-1:-1;;;;;27:323:1;;;;;;;;;;;;;;-1:-1:-1;;27:323:1;;;;;;77:36;27:323;;;",
   "source": "pragma solidity ^0.8.0;\r\n\r\ncontract Migrations {\r\n  address public owner;\r\n  uint public last_completed_migration;\r\n\r\n  constructor() {\r\n    owner = msg.sender;\r\n  }\r\n\r\n  function setCompleted(uint completed) public {\r\n    require(msg.sender == owner, \"Only the owner can set completed migration.\");\r\n    last_completed_migration = completed;\r\n  }\r\n}\r\n",
-  "sourcePath": "D:\\btech\\4 th Year\\Major Project\\Freelance\\Delance\\truffle_project\\contracts\\Migrations.sol",
+  "sourcePath": "C:\\Users\\malik\\OneDrive\\Desktop\\BTECH\\Final_year_project\\Lance-With-quote\\truffle_project\\contracts\\Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -492,7 +492,7 @@
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2026-03-22T17:55:24.876Z",
+  "updatedAt": "2026-04-16T18:09:13.154Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

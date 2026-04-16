@@ -34,8 +34,8 @@ contract Projects {
 
     uint public projectCount;
     uint public milestoneCount;
-
-    // RequestManager public requestManager;
+    address public requestManager;
+    address public owner;
 
     event ProjectAdded(uint id, string name, address employer);
     event MilestoneAdded(uint projectId, uint milestoneId, string name, uint percentage);
@@ -43,6 +43,17 @@ contract Projects {
     // constructor(address _requestManager) {
     //     requestManager = RequestManager(_requestManager);
     // }
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function setRequestManager(address _requestManager) public {
+        require(owner == msg.sender, "Only owner can set RequestManager");
+        require(_requestManager != address(0), "Invalid RequestManager address");
+        require(requestManager == address(0), "RequestManager already set");
+        requestManager = _requestManager;
+    }
 
     function addProject(string memory _name, string memory _description, uint _reward) public {
         projectCount++;
@@ -227,7 +238,7 @@ contract Projects {
     function closeProject(uint _id) public {
         require(_id > 0 && _id <= projectCount, "Project does not exist");
         Project storage proj = projects[_id];
-        require(msg.sender == proj.employer, "Only the employer can close this project");
+        require(msg.sender == proj.employer || msg.sender == requestManager, "Only the employer or RequestManager can close this project");
         proj.status = Status.Closed;
     }
 
