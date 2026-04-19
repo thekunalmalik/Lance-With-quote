@@ -86,7 +86,7 @@ To run this project, ensure you have the following installed:
 1. **Clone & Install**:
    ```bash
    git clone https://github.com/kunall0880/Freelance-.git
-   cd Delance
+   cd Freelance
    npm install
    ```
 
@@ -111,9 +111,17 @@ To run this project, ensure you have the following installed:
 
 4. **⚠️ CRITICAL: Copy Contract Artifacts After Every Deploy**
    
-   The React app **must** use fresh compiled ABIs. Run from `Delance` root:
+   The React app **must** use fresh compiled ABIs. Run from `Freelance` root:
    
-   **Windows PowerShell:**
+   **After `npm run migrate:dev`, the artifact copy step runs automatically.**
+   
+   If you want to run it manually, use:
+   
+   ```powershell
+   npm run copy-artifacts
+   ```
+   
+   Or manually:
    ```powershell
    Copy-Item "truffle_project\build\contracts\Projects.json" "src\contracts\Projects.json" -Force
    Copy-Item "truffle_project\build\contracts\RequestManager.json" "src\contracts\RequestManager.json" -Force
@@ -160,7 +168,7 @@ To run this project, ensure you have the following installed:
 
 7. **Run the Frontend**
 
-   Install dependencies and start React (from `Delance` root):
+   Install dependencies and start React (from `Freelance` root):
 
    ```bash
    npm install
@@ -204,6 +212,11 @@ For public testnet deployment (optional):
 
 4. **Copy Artifacts** (same as Ganache step 4):
    ```powershell
+   npm run copy-artifacts
+   ```
+   
+   Or manually:
+   ```powershell
    Copy-Item "truffle_project\build\contracts\Projects.json" "..\src\contracts\Projects.json" -Force
    Copy-Item "truffle_project\build\contracts\RequestManager.json" "..\src\contracts\RequestManager.json" -Force
    ```
@@ -220,7 +233,7 @@ For public testnet deployment (optional):
 
 ## Additional Scripts
 
-The `package.json` in the root of `Delance` includes a few helpful commands:
+The `package.json` in the root of `Freelance` includes a few helpful commands:
 
 ```json
 {
@@ -279,7 +292,7 @@ lookup.
   - Check the browser console for the log messages added by `getDeployedAddress`.
 
 - **Ganache CLI not recognized**
-  - Use `npm install` inside `Delance` to add `ganache` binary. The script
+  - Use `npm install` inside `Freelance` to add `ganache` binary. The script
     `npm run ganache` should then work.
   - You can also install `ganache` globally: `npm install -g ganache`.
 
@@ -347,7 +360,7 @@ private data.
 ## References
 
 This project is based on the original
-[Delance](https://github.com/kunall0880/Freelance-) repository by @kunall0880.
+[Freelance](https://github.com/kunall0880/Freelance-) repository by @kunall0880.
 The current setup focuses on **local development with Ganache** to avoid testnet
 gas fees and enable rapid iteration.
 

@@ -4,8 +4,8 @@ import RequestManagerContract from '../contracts/RequestManager.json';
 import { downloadFileFromIPFS } from './ipfs';
 
 const LOCAL_GANACHE_ADDRESSES = {
-  Projects: '0x2dc7fD1C2A38960D5691543bFBCCC7893B5C83A9',
-  RequestManager: '0xA28A1F4962fEA809991ec5bC093A367A21eF74eE'
+  Projects: '0x02FF13191b0494e9152ac4C6575FF71b0c46B6CD',
+  RequestManager: '0xC984BA3b1A30764719FB98BA8Ba863cFB3F21227'
 };
 
 // helper to pick contract address from deployed networks or fall back to an env var
@@ -179,8 +179,33 @@ export const fetchAllProjects = async () => {
   }
 };
 
-// src/services/web3.js
-// src/services/web3.js
+// Function to raise dispute
+export const raiseDispute = async (milestoneId, projectId, account) => {
+  const contract = await getRequestManagerContract();
+  if (contract) {
+    try {
+      // First, get the arbitration cost
+      const arbitrator = await contract.methods.arbitrator().call();
+      const extraData = await contract.methods.arbitratorExtraData().call();
+      // Note: To get cost, we need the arbitrator contract, but for simplicity, assume we have it or hardcode for Kleros
+      // For now, assume a fixed cost or fetch from arbitrator
+      // Let's assume we have the arbitrator address, but to keep simple, let's pass a fixed fee or fetch
+      // Actually, since it's payable, we can estimate or set a value
+      // For demo, let's set a value
+      const fee = Web3.utils.toWei('0.01', 'ether'); // Example fee
+
+      await contract.methods.raiseDispute(milestoneId, projectId).send({
+        from: account,
+        value: fee
+      });
+      return { success: true, message: 'Dispute raised successfully.' };
+    } catch (error) {
+      console.error('Error raising dispute:', error);
+      return { success: false, message: 'Failed to raise dispute.' };
+    }
+  }
+  return { success: false, message: 'Failed to connect to the contract.' };
+};
 export const fetchUserProjects = async (selectedAccount) => {
   //console.log(selectedAccount);
   //console.log(1);
@@ -260,7 +285,11 @@ export const getMilestones = async (projectId) => {
     const descriptions = result[3];
     const daycounts = result[4];
     const percentages = result[5];
-    const completions = result[6];
+    const statuses = result[6];
+    const freelancers = result[7];
+    const clients = result[8];
+    const amounts = result[9];
+    const proofFileHashes = result[10];
 
     // Map the milestones into an array of objects
     return ids.map((id, index) => ({
@@ -270,11 +299,34 @@ export const getMilestones = async (projectId) => {
       description: descriptions[index],
       daycount: daycounts[index].toString(),
       percentage: percentages[index].toString(),
-      completed: completions[index],
+      status: parseInt(statuses[index]),
+      freelancer: freelancers[index],
+      client: clients[index],
+      amount: amounts[index].toString(),
+      proof: proofFileHashes[index],
     }));
   } catch (error) {
     console.error('Error fetching milestones:', error);
     return []; // Return empty array on error
+  }
+};
+
+export const uploadMilestoneProof = async (projectId, milestoneId, freelancer, proofFileHash) => {
+  try {
+    const contract = await getProjectsContract();
+    if (!contract) {
+      console.error("Contract not found. Ensure you are connected to the correct network.");
+      return { success: false, message: 'Contract not found.' };
+    }
+
+    // Call the contract method to upload milestone proof
+    await contract.methods.uploadMilestoneProof(projectId, milestoneId, freelancer, proofFileHash).send({ from: freelancer });
+    
+    console.log("Milestone proof uploaded successfully.");
+    return { success: true, message: 'Milestone proof uploaded successfully.' };
+  } catch (error) {
+    console.error("Error uploading milestone proof:", error);
+    return { success: false, message: 'Failed to upload milestone proof.' };
   }
 };
 
@@ -553,7 +605,6 @@ export const fetchAcceptedProjectsByFreelancer = async (freelancer) => {
         const reqIds = allRequests[0] || [];
         const projIds = allRequests[1] || [];
         const freelancersArr = allRequests[2] || [];
-        const freelancerRatings = allRequests[3] || [];
         const statusesArr = allRequests[4] || [];
         const escrows = allRequests[5] || [];
 

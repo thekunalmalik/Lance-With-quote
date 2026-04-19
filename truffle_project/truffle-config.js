@@ -123,10 +123,10 @@ module.exports = {
       settings: {          // See the solidity docs for advice about optimization and evmVersion
        optimizer: {
          enabled: true,
-         runs: 10   // Lower runs value optimizes for smaller contract size
+         runs: 1   // Lower runs value optimizes for smaller contract size
        },
        viaIR: true,
-       evmVersion: "byzantium"
+       evmVersion: "paris"
       }
     }
   },

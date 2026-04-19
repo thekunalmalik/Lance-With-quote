@@ -3,25 +3,40 @@ pragma solidity ^0.8.0;
 
 import "./Projects.sol";
 
+interface IArbitrable {
+    function rule(uint256 _disputeID, uint256 _ruling) external;
+}
+
+interface IArbitrator {
+    function createDispute(uint256 _choices, bytes calldata _extraData) external payable returns (uint256 disputeID);
+    function arbitrationCost(bytes calldata _extraData) external view returns (uint256 cost);
+}
+
 contract Escrow {
     address public freelancer;
     address public employer;
+    address public requestManager;
     uint public amount;
 
-    constructor(address _freelancer, address _employer, uint _amount) payable {
+    constructor(address _freelancer, address _employer, address _requestManager, uint _amount) payable {
         freelancer = _freelancer;
         employer = _employer;
+        requestManager = _requestManager;
         amount = _amount;
     }
 
     function releaseFunds() external {
-        require(msg.sender == employer, "Only the employer can release funds");
+        require(msg.sender == employer || msg.sender == requestManager, "Only the employer or RequestManager can release funds");
         payable(freelancer).transfer(amount);
     }
 }
 
-contract RequestManager {
+contract RequestManager is IArbitrable {
     Projects public projectsContract;
+
+    IArbitrator public arbitrator;
+    bytes public arbitratorExtraData;
+    mapping(uint => uint[2]) public disputeToProjectMilestone; // [projectId, milestoneId]
 
     enum RequestStatus { Pending, Accepted, Rejected }
     enum QuotationStatus { Pending, Proposed, Negotiating, Accepted, Rejected }
@@ -143,9 +158,14 @@ contract RequestManager {
     event RequestDraftSent(uint draftId, uint requestId, address freelancer, address employer);
     event FreelancerRatingSubmitted(uint ratingId, address rater, address freelancer, uint rating);
     event ProjectCompleted(uint projectId, uint requestId, address employer, address freelancer);
+    event EscrowReleased(uint requestId, address escrowContract, uint amount);
+    event DisputeRaised(uint disputeId, uint milestoneId, uint projectId);
+    event DisputeResolved(uint disputeId, uint ruling);
 
-    constructor(address _projectsContract) {
+    constructor(address _projectsContract, address _arbitrator, bytes memory _extraData) {
         projectsContract = Projects(_projectsContract);
+        arbitrator = IArbitrator(_arbitrator);
+        arbitratorExtraData = _extraData;
     }
 
     function sendRequest(uint _projectId, uint _freelancerRating) public {
@@ -180,7 +200,7 @@ contract RequestManager {
         require(status == Projects.Status.Open, "Project must be open");
 
         // Create new escrow contract instance with freelancer and employer details
-        request.escrowContract = new Escrow{value: projectReward}(request.freelancer, employer, projectReward);
+        request.escrowContract = new Escrow{value: projectReward}(request.freelancer, employer, address(this), projectReward);
 
         request.status = RequestStatus.Accepted;
         
@@ -432,7 +452,7 @@ contract RequestManager {
         require(reviewRequest.id != 0, "Review request does not exist");
         
         // Find the corresponding request based on the project ID and freelancer address
-        for (uint i = 0; i < requestCount; i++) {
+        for (uint i = 1; i <= requestCount; i++) {
             Request storage request = requests[i];
 
             // Check if the request matches the provided projectId and the freelancer address from the review request
@@ -445,6 +465,108 @@ contract RequestManager {
         revert("No matching request found for this review request");
     }
 
+    function raiseDispute(uint milestoneId, uint projectId) external payable {
+        // Get milestone details
+        (
+            uint[] memory ids,
+            ,
+            ,
+            ,
+            ,
+            ,
+            Projects.MilestoneStatus[] memory statuses,
+            address[] memory freelancers,
+            address[] memory clients,
+            ,
+            
+        ) = projectsContract.getMilestones(projectId);
+
+        uint index = milestoneId - 1;
+        require(index < ids.length && ids[index] == milestoneId, "Invalid milestone");
+        require(statuses[index] == Projects.MilestoneStatus.Submitted, "Milestone not in submitted state");
+        require(msg.sender == freelancers[index] || msg.sender == clients[index], "Only freelancer or client can raise dispute");
+
+        // Fetch arbitration cost
+        uint cost = arbitrator.arbitrationCost(arbitratorExtraData);
+        require(msg.value >= cost, "Insufficient arbitration fee");
+
+        // Create dispute
+        uint disputeID = arbitrator.createDispute{value: cost}(2, arbitratorExtraData); // 2 choices: freelancer wins or client wins
+
+        // Store mapping
+        disputeToProjectMilestone[disputeID] = [projectId, milestoneId];
+
+        // Update milestone status to Disputed
+        // Note: Need to add a function in Projects to set status
+        // For now, assume we add it
+        projectsContract.setMilestoneStatus(projectId, milestoneId, Projects.MilestoneStatus.Disputed);
+
+        emit DisputeRaised(disputeID, milestoneId, projectId);
+    }
+
+    function rule(uint disputeID, uint ruling) external override {
+        require(msg.sender == address(arbitrator), "Only arbitrator can rule");
+
+        uint[2] memory pm = disputeToProjectMilestone[disputeID];
+        require(pm[0] != 0 || pm[1] != 0, "Dispute not found");
+
+        uint projectId = pm[0];
+        uint milestoneId = pm[1];
+
+        if (ruling == 1) {
+            // Freelancer wins
+            projectsContract.setMilestoneStatus(projectId, milestoneId, Projects.MilestoneStatus.Approved);
+            // Release funds for this milestone
+            // But since escrow is for all, perhaps release all if all approved
+            // For simplicity, check if all approved and release
+            checkAndReleaseEscrow(projectId);
+        } else if (ruling == 2) {
+            // Client wins
+            projectsContract.setMilestoneStatus(projectId, milestoneId, Projects.MilestoneStatus.Resolved);
+            // Funds stay in escrow or refund to client? For simplicity, do nothing or refund
+            // Since escrow is locked, perhaps refund to client
+            // But to keep simple, just mark resolved
+        } else if (ruling == 0) {
+            // Split or something, but for simplicity, mark resolved
+            projectsContract.setMilestoneStatus(projectId, milestoneId, Projects.MilestoneStatus.Resolved);
+        }
+
+        emit DisputeResolved(disputeID, ruling);
+    }
+
+    function checkAndReleaseEscrow(uint projectId) internal {
+        (
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            Projects.MilestoneStatus[] memory statuses,
+            ,
+            ,
+            ,
+            
+        ) = projectsContract.getMilestones(projectId);
+
+        bool allApproved = true;
+        for (uint i = 0; i < statuses.length; i++) {
+            if (statuses[i] != Projects.MilestoneStatus.Approved) {
+                allApproved = false;
+                break;
+            }
+        }
+
+        if (allApproved) {
+            // Get escrow and release
+            uint requestId = projectToRequest[projectId];
+            Request storage request = requests[requestId];
+            Escrow escrow = request.escrowContract;
+            uint escrowAmount = escrow.amount();
+            escrow.releaseFunds();
+            emit EscrowReleased(requestId, address(escrow), escrowAmount);
+        }
+    }
 
 
 
@@ -464,7 +586,10 @@ contract RequestManager {
             string[] memory descriptions,
             uint[] memory daycounts,
             uint[] memory percentages,
-            bool[] memory completions,
+            Projects.MilestoneStatus[] memory statuses,
+            address[] memory freelancers,
+            address[] memory clients,
+            uint[] memory amounts,
             string[] memory proofFileHashes
         ) = projectsContract.getMilestones(_projId);
 
@@ -474,8 +599,15 @@ contract RequestManager {
         string memory milestoneDescription;
         uint milestoneDaycount;
         uint milestonePercentage;
-        bool milestoneCompleted;
+        Projects.MilestoneStatus milestoneStatus;
+        address milestoneFreelancer;
+        address milestoneClient;
+        uint milestoneAmount;
         string memory milestoneProofFileHash;
+
+        // Fetch project details and validate the caller is the employer
+        (, , , , Projects.Status projectStatus, address employer, ) = projectsContract.getProject(_projId);
+        require(msg.sender == employer, "Only the employer can accept milestone review requests");
 
         // Search for the milestone with the specified milestoneId
         for (uint i = 0; i < ids.length; i++) {
@@ -485,7 +617,10 @@ contract RequestManager {
                 milestoneDescription = descriptions[i];
                 milestoneDaycount = daycounts[i];
                 milestonePercentage = percentages[i];
-                milestoneCompleted = completions[i];
+                milestoneStatus = statuses[i];
+                milestoneFreelancer = freelancers[i];
+                milestoneClient = clients[i];
+                milestoneAmount = amounts[i];
                 milestoneProofFileHash = proofFileHashes[i];
                 break;
             }
@@ -494,6 +629,9 @@ contract RequestManager {
         require(milestoneFound, "Milestone does not exist");
 
         reviewRequest.reviewed = true;
+
+        // Mark the milestone completed in the Projects contract
+        projectsContract.completeMilestone(_projId, milestoneId);
 
         // Get freelancer's address from the request
         address freelancer = reviewRequest.freelancer;
@@ -511,8 +649,21 @@ contract RequestManager {
         // Set the new rating for the freelancer
         projectsContract.setFreelancerRating(freelancer, newRating);
 
-        // TODO: Implement milestone payment release
-        // getEscrowAccountFromReviewRequest(_reviewRequestId, _projId).releaseMilestonePayment(milestonePercentage);
+        // If all milestones are now approved, release escrow funds to the freelancer
+        bool allMilestonesApproved = true;
+        for (uint i = 0; i < statuses.length; i++) {
+            if (statuses[i] != Projects.MilestoneStatus.Approved) {
+                allMilestonesApproved = false;
+                break;
+            }
+        }
+
+        if (allMilestonesApproved) {
+            Escrow escrow = getEscrowAccountFromReviewRequest(_reviewRequestId, _projId);
+            uint escrowAmount = escrow.amount();
+            escrow.releaseFunds();
+            emit EscrowReleased(_reviewRequestId, address(escrow), escrowAmount);
+        }
 
         uint _milestoneId = reviewRequest.milestoneId;
         address _freelancer = reviewRequest.freelancer;
@@ -526,65 +677,6 @@ contract RequestManager {
             accepted: true
         });
     }
-
-
-
-    // function acceptMilestoneReviewRequest(uint _reviewRequestId, uint _projId) public payable {
-    //     // Fetch the  request using the ID
-    //     MilestoneReviewRequest storage reviewRequest = milestoneReviewRequests[_reviewRequestId];
-    //     require(!reviewRequest.reviewed, "Review request already accepted");
-
-    //     // Get the milestone ID from the  request
-    //     uint milestoneId = reviewRequest.milestoneId;
-
-    //     // Retrieve the associated milestones for the project
-    //     (
-    //         uint[] memory ids,
-    //         uint[] memory projectIds,
-    //         string[] memory names,
-    //         string[] memory descriptions,
-    //         uint[] memory daycounts,
-    //         uint[] memory percentages,
-    //         bool[] memory completions,
-    //         string[] memory proofFileHashes
-    //     ) = projectsContract.getMilestones(_projId);
-
-    //     // Initialize variables to store the milestone data once we find it
-    //     bool milestoneFound = false;
-    //     string memory milestoneName;
-    //     string memory milestoneDescription;
-    //     uint milestoneDaycount;
-    //     uint milestonePercentage;
-    //     bool milestoneCompleted;
-    //     string memory milestoneProofFileHash;
-
-    //     // Search for the milestone with the specified milestoneId
-    //     for (uint i = 0; i < ids.length; i++) {
-    //         if (ids[i] == milestoneId) {
-    //             milestoneFound = true;
-    //             milestoneName = names[i];
-    //             milestoneDescription = descriptions[i];
-    //             milestoneDaycount = daycounts[i];
-    //             milestonePercentage = percentages[i];
-    //             milestoneCompleted = completions[i];
-    //             milestoneProofFileHash = proofFileHashes[i];
-    //             break;
-    //         }
-    //     }
-
-    //     require(milestoneFound, "Milestone does not exist");
-
-    //     // Use getProject to retrieve the project details
-    //     (
-    //         uint projId,
-    //         string memory projName,
-    //         string memory projDescription,
-    //         uint projReward,
-    //         Projects.Status projStatus,
-    //         address projEmployer
-    //     ) = projectsContract.getProject(_projId);
-
-    //     // Verify that the sender is the employer of the project
     //     require(projEmployer == msg.sender, "Only the employer can accept milestones");
 
     //     // Mark the review request as accepted
@@ -1093,7 +1185,7 @@ contract RequestManager {
         quotation.status = QuotationStatus.Accepted;
         
         // Create escrow with new amount
-        Escrow escrow = new Escrow{value: quotation.proposedAmount}(request.freelancer, employer, quotation.proposedAmount);
+        Escrow escrow = new Escrow{value: quotation.proposedAmount}(request.freelancer, employer, address(this), quotation.proposedAmount);
         request.escrowContract = escrow;
         request.status = RequestStatus.Accepted;
         

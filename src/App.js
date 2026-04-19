@@ -14,7 +14,7 @@ function App() {
     <div className="app-shell">
       <div className="topnav">
         <div className="brand">
-          <span>DeLance</span> Web3 Job Board
+          <span>Freelance</span> Web3 Job Board
         </div>
         <div className="status-pill">Dark dashboard theme</div>
       </div>

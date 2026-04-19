@@ -116,7 +116,7 @@ function Auth() {
     <div className="auth-container">
       <div className="auth-intro">
         <div className="hero-copy">
-          <span className="eyebrow">Welcome to DeLance</span>
+          <span className="eyebrow">Welcome to Freelance</span>
           <h1>Launch your next Web3 freelancing project with trust and speed.</h1>
           <p className="hero-description">Connect your wallet, choose a role, and move from hiring to delivery on a blockchain-native marketplace.</p>
         </div>
@@ -138,7 +138,7 @@ function Auth() {
 
       <div className="auth-card">
         <h2>Login with MetaMask</h2>
-        <p>Connect your wallet, select your role, and enter the DeLance dashboard.</p>
+        <p>Connect your wallet, select your role, and enter the Freelance dashboard.</p>
 
         {errorMessage && (
           <div className="auth-error">

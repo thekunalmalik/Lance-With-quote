@@ -7,6 +7,8 @@ contract Projects {
     
     enum Status { Closed, Open }
 
+    enum MilestoneStatus { Pending, Submitted, Approved, Disputed, Resolved }
+
     struct Project {
         uint id;
         string name;
@@ -24,7 +26,10 @@ contract Projects {
         string description;
         uint daycount;
         uint percentage;
-        bool completed;
+        MilestoneStatus status;
+        address freelancer;
+        address client;
+        uint amount;
         string proofFileHash; // To store proof file hash
     }
 
@@ -76,6 +81,7 @@ contract Projects {
         require(_percentage > 0 && _percentage <= 100, "Invalid percentage");
 
         milestoneCount++;
+        uint amount = (projects[_projectId].reward * _percentage) / 100;
         milestones[_projectId].push(Milestone({
             id: milestoneCount,
             projectId: _projectId,
@@ -83,7 +89,10 @@ contract Projects {
             description: _description,
             daycount: _daycount,
             percentage: _percentage,
-            completed: false,
+            status: MilestoneStatus.Pending,
+            freelancer: address(0),
+            client: projects[_projectId].employer,
+            amount: amount,
             proofFileHash: "" // Initialize proof file hash as empty
         }));
 
@@ -97,8 +106,13 @@ contract Projects {
         // Check if the milestone exists
         require(_milestoneId > 0 && _milestoneId <= milestones[_projectId].length, "Invalid milestone ID");
 
+        Milestone storage milestone = milestones[_projectId][_milestoneId - 1];
+        require(milestone.status == MilestoneStatus.Pending, "Milestone not in pending state");
+
         // Store the proof file hash for the milestone
-        milestones[_projectId][_milestoneId - 1].proofFileHash = _proofFileHash;
+        milestone.proofFileHash = _proofFileHash;
+        milestone.status = MilestoneStatus.Submitted;
+        milestone.freelancer = _freelancer;
 
         emit MilestoneProofUploaded(_projectId, _milestoneId, _proofFileHash);
     }
@@ -191,7 +205,10 @@ contract Projects {
             string[] memory descriptions, 
             uint[] memory daycounts, 
             uint[] memory percentages, 
-            bool[] memory completions, 
+            MilestoneStatus[] memory statuses,
+            address[] memory freelancers,
+            address[] memory clients,
+            uint[] memory amounts,
             string[] memory proofFileHashes
         ) 
     {
@@ -207,7 +224,10 @@ contract Projects {
         descriptions = new string[](milestonesCount);
         daycounts = new uint[](milestonesCount);
         percentages = new uint[](milestonesCount);
-        completions = new bool[](milestonesCount);
+        statuses = new MilestoneStatus[](milestonesCount);
+        freelancers = new address[](milestonesCount);
+        clients = new address[](milestonesCount);
+        amounts = new uint[](milestonesCount);
         proofFileHashes = new string[](milestonesCount);
 
         // Populate each array with the corresponding data from each milestone
@@ -219,7 +239,10 @@ contract Projects {
             descriptions[i] = milestone.description;
             daycounts[i] = milestone.daycount;
             percentages[i] = milestone.percentage;
-            completions[i] = milestone.completed;
+            statuses[i] = milestone.status;
+            freelancers[i] = milestone.freelancer;
+            clients[i] = milestone.client;
+            amounts[i] = milestone.amount;
             proofFileHashes[i] = milestone.proofFileHash;
         }
 
@@ -230,7 +253,10 @@ contract Projects {
             descriptions, 
             daycounts, 
             percentages, 
-            completions, 
+            statuses,
+            freelancers,
+            clients,
+            amounts,
             proofFileHashes
         );
     }
@@ -247,9 +273,16 @@ contract Projects {
         require(_milestoneId > 0 && _milestoneId <= milestones[_projectId].length, "Milestone does not exist");
         
         Milestone storage milestone = milestones[_projectId][_milestoneId - 1];
-        require(!milestone.completed, "Milestone already completed");
+        require(milestone.status == MilestoneStatus.Submitted, "Milestone not in submitted state");
         
-        milestone.completed = true; // Mark the milestone as completed
+        milestone.status = MilestoneStatus.Approved; // Mark the milestone as approved
+    }
+
+    function setMilestoneStatus(uint _projectId, uint _milestoneId, MilestoneStatus _status) public {
+        require(_projectId > 0 && _projectId <= projectCount, "Project does not exist");
+        require(_milestoneId > 0 && _milestoneId <= milestones[_projectId].length, "Milestone does not exist");
+        
+        milestones[_projectId][_milestoneId - 1].status = _status;
     }
 
     function setFreelancerRating(address _freelancer, uint _rating) public {

@@ -1,6 +1,6 @@
 // FreelancerProjectCard.js
 import React, { useEffect, useState } from 'react';
-import { getFreelancerRating, sendRequest, getMilestones } from '../../../../services/web3'; // Adjust the path based on your project structure
+import { getFreelancerRating, getMilestones } from '../../../../services/web3'; // Adjust the path based on your project structure
 import QuotationForm from '../../QuotationForm/QuotationForm'; // Import QuotationForm
 import MilestoneCard from '../MilestoneCard/MilestoneCard';
 import './ProjectCard.css'
@@ -8,7 +8,6 @@ import './ProjectCard.css'
 const FreelancerProjectCard = ({ project, selectedAccount }) => { // Accept selectedAccount as a prop
   const { id, title, description, reward, status, employer } = project;
   const [freelancerRating, setFreelancerRating] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [milestones, setMilestones] = useState([]);
   const [showMilestones, setShowMilestones] = useState(false); // New state for toggling milestones view
   const [showQuotationForm, setShowQuotationForm] = useState(false); // Show/hide quotation form modal
@@ -71,8 +70,8 @@ const FreelancerProjectCard = ({ project, selectedAccount }) => { // Accept sele
       <p>Employer: {employer}</p>
       <p>Freelancer Rating: {freelancerRating !== undefined && freelancerRating !== null ? freelancerRating.toString() : 'N/A'} / 5</p>
 
-      <button onClick={handleSendRequest} disabled={loading}>
-        {loading ? 'Sending...' : 'Send Request'}
+      <button onClick={handleSendRequest}>
+        Send Request
       </button>
 
       {/* Button to view milestones */}
